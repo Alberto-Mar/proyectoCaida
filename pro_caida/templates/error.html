@@ -1,0 +1,20 @@
+{% extends "caida/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="contenedor">
+        <main class="principal-completo">
+            <div class="contenedor-error">
+                <div class="codigo-error">ERROR</div>
+                <h2 class="margen-inferior-1">Algo no ha ido según lo previsto.</h2>
+                <p class="mensaje-error">
+                    Si el problema persiste contacte con soporte.
+                </p>
+                <div class="margen-superior-2">
+                    <a href="inicio_user.html" class="boton boton-primario">Inicio Usuario</a>
+                    <a href="inicio_admin.html" class="boton boton-primario">Inicio Admin</a>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

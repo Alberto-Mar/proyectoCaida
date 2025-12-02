@@ -1,6 +1,0 @@
-apps:
-common
-users
-bookings
-ads
-eventos

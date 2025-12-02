@@ -1,5 +1,16 @@
-<header>
-    <h1>
-        Este es mi header 
-    </h1>
-</header>
+{% load static %}
+{% block header %}
+    <header>
+        <div class="contenido-header">
+            <div class="logo">
+                <img src="{% static 'caida/images/logo_caida.png' %}" alt="Caida Logo">
+                <span class="texto-logo">Hermandad de La Caida </span>
+            </div>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Contacto</a>
+                <a href="{% url 'login' %}">Cerrar sesión</a>
+            </nav>
+        </div>
+    </header>
+{% endblock %}

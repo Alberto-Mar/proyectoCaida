@@ -1,0 +1,61 @@
+{% extends 'caida/base.html' %}
+{% load static %}
+{% block content %}
+<div class="contenedor">
+    <aside class="barra-lateral">
+        <a href="#" class="activo">Actos Disponibles</a>
+        <a href="#">Mis Inscripciones</a>
+        <a href="#">Mi Perfil</a>
+        <a href="#">Notificaciones</a>
+        <a href="#">Configuración</a>
+    </aside>
+
+    <main>
+        <div class="encabezado-contenido">
+            <h1>Actos Disponibles</h1>
+            <p>Consulta los próximos actos y selecciona aquellos en los que deseas participar.</p>
+        </div>
+
+        <div class="grid-tarjetas">
+            <div class="tarjeta tarjeta-evento">
+                <img src="{% static 'caida/images/evento1.jpg' %}" alt="Traslado de ida" class="imagen-evento">
+                <div class="contenido-tarjeta-evento">
+                    <div class="encabezado-tarjeta-evento">
+                        <span class="etiqueta etiqueta-activo">Abierto</span>
+                    </div>
+                    <h3>Traslado de ida</h3>
+                    <div class="detalles-evento">
+                        <p><strong>Fecha:</strong> 20/04/2026</p>
+                        <p><strong>Hora:</strong> 18:00</p>
+                        <p><strong>Tipo:</strong> Traslado</p>
+                        <p><strong>Responsable:</strong> Juan Pérez García</p>
+                    </div>
+                    <button class="boton boton-primario boton-completo margen-superior-1">Inscribirme</button>
+                </div>
+            </div>
+
+            <div class="tarjeta tarjeta-evento">
+                <img src="{% static 'caida/images/evento2.jpg' %}" alt="Misa Onomástica Rosario" class="imagen-evento">
+                <div class="contenido-tarjeta-evento">
+                    <div class="encabezado-tarjeta-evento">
+                        <span class="etiqueta etiqueta-pendiente">Inscrito</span>
+                    </div>
+                    <h3>Misa Onomástica Rosario</h3>
+                    <div class="detalles-evento">
+                        <p><strong>Fecha:</strong> 15/03/2026</p>
+                        <p><strong>Hora:</strong> 20:00</p>
+                        <p><strong>Tipo:</strong> Misa</p>
+                        <p><strong>Responsable:</strong> Juan Pérez García</p>
+                    </div>
+                    <button class="boton boton-secundario boton-completo margen-superior-1" disabled>Ya
+                        Inscrito</button>
+                </div>
+            </div>
+        </div>
+        <div class="margen-superior-2">
+            <a href="{% url 'inicio_hermano' %}" class="boton boton-primario">Inicio Usuario</a>
+            <a href="{% url 'inicio_admin' %}" class="boton boton-primario">Inicio Admin</a>
+        </div>
+    </main>
+</div>
+{% endblock %}

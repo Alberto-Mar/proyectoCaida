@@ -24,9 +24,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-80#tubhj^6eunje!-u*ep=at$y6m_x43hytr*_tgv&%3_k-da&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+environment_variable = os.getenv('ENVIRONMENT', 'development')
 
-ALLOWED_HOSTS = []
+if environment_variable == 'development':
+  DEBUG = True
+  ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+if environment_variable == 'production':
+  DEBUG = False
+  ALLOWED_HOSTS = ['prod.localhost']  # Cambiar por el dominio real en producción (prod.localhost)
+
 
 
 # Application definition
@@ -79,8 +86,14 @@ WSGI_APPLICATION = 'laCaida.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql', # Busca las librerias para usar PostgreSQL
+        'NAME': 'bd-caida',
+        'USER': 'alberto',
+        'PASSWORD': '1234',
+        'HOST': 'db',    # Nombre del servicio en docker-compose (contenedor)
+        'PORT': '5432',         # Puerto por defecto de PostgreSQL
     }
 }
 
@@ -121,6 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles/')
