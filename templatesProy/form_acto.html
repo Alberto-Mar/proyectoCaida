@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Crear Acto</title>
+</head>
+
+<body>
+    <header>
+        <div class="contenido-header">
+            <div class="logo">
+                <img src="logo_caida.png" alt="Caida Logo">
+                <span class="texto-logo">Hermandad de La Caida </span>
+            </div>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Contacto</a>
+                <a href="login.html">Cerrar sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="contenedor">
+<aside class="barra-lateral">
+            <a href="#">Inscripripciones</a>
+            <a href="#">Hermanos</a>
+            <a href="#" class="activo">Actos</a>
+            <a href="#">Mi Perfil</a>
+            <a href="#">Notificaciones</a>
+            <a href="#">Configuración</a>
+        </aside>
+
+        <main>
+            <div class="encabezado-contenido">
+                <h1>Crear Nuevo Acto</h1>
+                <p>Completa el formulario para crear un nuevo acto o evento en el club.</p>
+            </div>
+
+            <div class="contenedor-formulario">
+                <form>
+                    <div class="grupo-formulario">
+                        <label for="nombre">Nombre del Acto *</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Procesión del Viernes Santo"
+                            required>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label for="fec_inicio">Fecha y Hora de Inicio *</label>
+                        <input type="datetime-local" id="fec_inicio" name="fec_inicio" required>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label for="tipo">Tipo de Acto *</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="">Selecciona un tipo</option>
+                            <option value="Procesión">Procesión</option>
+                            <option value="Traslado">Traslado</option>
+                            <option value="Cabildo">Cabildo</option>
+                            <option value="Ensayo">Ensayo</option>
+                            <option value="Misa">Misa</option>
+                            <option value="Convivencia">Convivencia</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-botones">
+                        <button type="submit" class="boton boton-primario">Crear Acto</button>
+                        <button type="reset" class="boton boton-secundario">Limpiar Formulario</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LA CAIDA ELCHE</p>
+    </footer>
+</body>
+
+</html>

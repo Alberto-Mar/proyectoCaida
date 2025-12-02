@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Zona Hermano</title>
+</head>
+
+<body>
+    <header>
+        <div class="contenido-header">
+            <div class="logo">
+                <img src="logo_caida.png" alt="Caida Logo">
+                <span class="texto-logo">Hermandad de La Caida </span>
+            </div>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Contacto</a>
+                <a href="login.html">Cerrar sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="contenedor">
+        <aside class="barra-lateral">
+            <a href="#" class="activo">Actos Disponibles</a>
+            <a href="#">Mis Inscripciones</a>
+            <a href="#">Mi Perfil</a>
+            <a href="#">Notificaciones</a>
+            <a href="#">Configuración</a>
+        </aside>
+
+        <main>
+            <div class="encabezado-contenido">
+                <h1>Actos Disponibles</h1>
+                <p>Consulta los próximos actos y selecciona aquellos en los que deseas participar.</p>
+            </div>
+
+            <div class="grid-tarjetas">
+                <div class="tarjeta tarjeta-evento">
+                    <img src="evento1.jpg" alt="Traslado de ida" class="imagen-evento">
+                    <div class="contenido-tarjeta-evento">
+                        <div class="encabezado-tarjeta-evento">
+                            <span class="etiqueta etiqueta-activo">Abierto</span>
+                        </div>
+                        <h3>Traslado de ida</h3>
+                        <div class="detalles-evento">
+                            <p><strong>Fecha:</strong> 20/04/2026</p>
+                            <p><strong>Hora:</strong> 18:00</p>
+                            <p><strong>Tipo:</strong> Traslado</p>
+                            <p><strong>Responsable:</strong> Juan Pérez García</p>
+                        </div>
+                        <button class="boton boton-primario boton-completo margen-superior-1">Inscribirme</button>
+                    </div>
+                </div>
+
+                <div class="tarjeta tarjeta-evento">
+                    <img src="evento2.jpg" alt="Misa Onomástica Rosario" class="imagen-evento">
+                    <div class="contenido-tarjeta-evento">
+                        <div class="encabezado-tarjeta-evento">
+                            <span class="etiqueta etiqueta-pendiente">Inscrito</span>
+                        </div>
+                        <h3>Misa Onomástica Rosario</h3>
+                        <div class="detalles-evento">
+                            <p><strong>Fecha:</strong> 15/03/2026</p>
+                            <p><strong>Hora:</strong> 20:00</p>
+                            <p><strong>Tipo:</strong> Misa</p>
+                            <p><strong>Responsable:</strong> Juan Pérez García</p>
+                        </div>
+                        <button class="boton boton-secundario boton-completo margen-superior-1" disabled>Ya
+                            Inscrito</button>
+                    </div>
+                </div>
+            </div>
+            <div class="margen-superior-2">
+                    <a href="inicio_user.html" class="boton boton-primario">Inicio Usuario</a>
+                    <a href="inicio_admin.html" class="boton boton-primario">Inicio Admin</a>
+                </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LA CAIDA ELCHE</p>
+    </footer>
+</body>
+
+</html>

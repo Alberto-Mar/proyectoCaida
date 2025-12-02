@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Admin</title>
+</head>
+
+<body>
+    <header>
+        <div class="contenido-header">
+            <div class="logo">
+                <img src="logo_caida.png" alt="Caida Logo">
+                <span class="texto-logo">Hermandad de La Caida</span>
+            </div>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Contacto</a>
+                <a href="login.html">Cerrar sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="contenedor">
+        <aside class="barra-lateral">
+            <a href="#" class="activo">Inscripripciones</a>
+            <a href="#">Hermanos</a>
+            <a href="#">Actos</a>
+            <a href="#">Mi Perfil</a>
+            <a href="#">Notificaciones</a>
+            <a href="#">Configuración</a>
+        </aside>
+
+        <main>
+            <div class="encabezado-contenido">
+                <h1>Panel de Administración</h1>
+                <p>Bienvenido, Administrador.</p>
+            </div>
+
+            <div class="contenedor-tabla">
+                <h2 class="titulo-tabla">Últimas inscripciones</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hermano</th>
+                            <th>Acto</th>
+                            <th>Fecha</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Juan Pérez</td>
+                            <td>Traslado de ida</td>
+                            <td>20/04/2026</td>
+                            <td>Costalero</td>
+                            <td><span class="etiqueta etiqueta-activo">Confirmada</span></td>
+                            <td><button class="boton boton-pequeno boton-secundario">Ver</button></td>
+                        </tr>
+                        <tr>
+                            <td>María García</td>
+                            <td>Traslado de ida</td>
+                            <td>20/04/2026</td>
+                            <td>Tambor</td>
+                            <td><span class="etiqueta etiqueta-pendiente">Pendiente</span></td>
+                            <td><button class="boton boton-pequeno boton-secundario">Ver</button></td>
+                        </tr>
+                        <tr>
+                            <td>Carlos López</td>
+                            <td>Misa Onomástica Rosario</td>
+                            <td>15/03/2026</td>
+                            <td>Aistente</td>
+                            <td><span class="etiqueta etiqueta-activo">Confirmada</span></td>
+                            <td><button class="boton boton-pequeno boton-secundario">Ver</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grupo-botones">
+                <a href="form_acto.html" class="boton boton-primario">Crear Acto</a>
+                <a href="form_user.html" class="boton boton-primario">Crear Hermano</a>
+            </div>
+            <div class="margen-superior-2">
+                    <a href="inicio_user.html" class="boton boton-primario">Inicio Usuario</a>
+                    <a href="inicio_admin.html" class="boton boton-primario">Inicio Admin</a>
+                </div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 LA CAIDA ELCHE</p>
+    </footer>
+</body>
+
+</html>

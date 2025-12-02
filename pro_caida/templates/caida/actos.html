@@ -1,0 +1,11 @@
+{% extends "caida/base.html" %}
+
+{% block content %}
+    <h2>ACTOS</h2><br>
+    {% for acto in actos %}
+    <h3>{{acto.nombre}} - {{acto.fec_inicio}}</h3>
+    <br>
+    <img src="{{acto.imagen}}" alt="No hay imagen"></img>
+    <br><br>
+    {% endfor %}
+{% endblock %}
