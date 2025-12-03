@@ -28,6 +28,7 @@ urlpatterns = [
     path('inicio_hermano/', v_common.HermanoView.as_view(), name="inicio_hermano" ),
     path('inicio_admin/', v_common.AdminView.as_view(), name="inicio_admin" ),
     path('crear_acto/', v_common.CrearActoView.as_view(), name="crear_acto" ),
+    path('crear_hermano_auto/', v_common.UserCreateView.as_view(), name="crear_hermano_auto" ),
     path('crear_hermano/', v_common.CrearHermanoView.as_view(), name="crear_hermano" ),
 ]
 

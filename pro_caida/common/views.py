@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from .models import Hermano
 
 class LoginView(TemplateView):
     template_name="caida/login.html"
@@ -13,6 +15,16 @@ class HermanoView(TemplateView):
 class AdminView(TemplateView):
     template_name="caida/inicio_admin.html"
     
+class UserCreateView(CreateView):
+    model = Hermano
+    fields = ['nombre_completo', 'dni', 'fec_nacimiento', 'foto', 'cargo_junta']  
+    success_url = reverse_lazy('login')  
+    
+class UserUpdateView(UpdateView):
+    model = Hermano
+    fields = ['nombre_completo', 'dni', 'fec_nacimiento', 'foto', 'cargo_junta']
+    success_url = reverse_lazy('home')   
+
 class CrearHermanoView(TemplateView):
     template_name="caida/crear_hermano.html"
     

@@ -1,4 +1,17 @@
 services:
+  db:
+    image: postgres:15
+    container_name: bd-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: bd-caida
+      POSTGRES_USER: alberto
+      POSTGRES_PASSWORD: "1234"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    restart: always
+
   web:
     build: .
     ports:
@@ -8,24 +21,3 @@ services:
       - ./scripts_docker:/scripts_docker
     depends_on:
       - db
-    environment:
-      DATABASE_HOST: db
-      DATABASE_NAME: bd-caida
-      DATABASE_USER: alberto
-      DATABASE_PASSWORD: 1234
-
-  db:
-    image: postgres:15
-    container_name: bd-postgres
-    environment:
-      POSTGRES_USER: alberto
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: bd-caida
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: always
-
-volumes:
-  postgres_data:
