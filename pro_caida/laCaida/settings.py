@@ -89,7 +89,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql', # Busca las librerias para usar PostgreSQL
-        'NAME': 'b.d-caida',
+        'NAME': 'bd-caida',
         'USER': 'alberto',
         'PASSWORD': '1234',
         'HOST': 'db',    # Nombre del servicio en docker-compose (contenedor)
@@ -136,8 +136,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

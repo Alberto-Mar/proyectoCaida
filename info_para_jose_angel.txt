@@ -1,0 +1,2 @@
+Hay una carpeta fuera del proyecto llamada templates (pruebas inciales de la asignatura de interfaces), las importantes son las que estan DENTRO del proyecto.
+
