@@ -11,7 +11,9 @@
 
 <body>
     {% block header %} {% include "caida/header.html" %} {% endblock %}
-    {% block content %}{% endblock %}
+    <div class="contenedor">
+        {% block content %}{% endblock %}
+    </div>
     {% block footer %} {% include "caida/footer.html" %} {% endblock %}
 </body>
 

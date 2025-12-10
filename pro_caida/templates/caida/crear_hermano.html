@@ -1,71 +1,69 @@
 {% extends 'caida/base.html' %}
 {% load static %}
 {% block content %}
-<div class="contenedor">
-    <aside class="barra-lateral">
-        <a href="{% url 'inicio_admin' %}">Inscripripciones</a>
-        <a href="{% url 'crear_hermano' %}" class="activo">Hermanos</a>
-        <a href="{% url 'crear_acto' %}">Actos</a>
-        <a href="#">Mi Perfil</a>
-        <a href="#">Notificaciones</a>
-        <a href="#">Configuración</a>
-    </aside>
+<aside class="sidebar">
+    <a href="{% url 'inicio_admin' %}">Inscripripciones</a>
+    <a href="{% url 'crear_hermano' %}" class="activo">Hermanos</a>
+    <a href="{% url 'crear_acto' %}">Actos</a>
+    <a href="#">Mi Perfil</a>
+    <a href="#">Notificaciones</a>
+    <a href="#">Configuración</a>
+</aside>
 
-    <main>
-        <div class="encabezado-contenido">
-            <h1>Crear Nuevo Hermano</h1>
-            <p>Completa el formulario para registrar un nuevo hermano.</p>
-        </div>
+<main>
+    <div class="page-header">
+        <h1>Crear Nuevo Hermano</h1>
+        <p>Completa el formulario para registrar un nuevo hermano.</p>
+    </div>
 
-        <div class="contenedor-formulario">
-            <form>
-                <div class="grupo-formulario">
-                    <label for="nombre_completo">Nombre Completo *</label>
-                    <input type="text" id="nombre_completo" name="nombre_completo" required>
-                </div>
+    <div class="form-container">
+        <form>
+            <div class="form-group">
+                <label for="nombre_completo">Nombre Completo *</label>
+                <input type="text" id="nombre_completo" name="nombre_completo" required>
+            </div>
 
-                <div class="grupo-formulario">
-                    <label for="contrasena">Contraseña *</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
-                </div>
+            <div class="form-group">
+                <label for="contrasena">Contraseña *</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+            </div>
 
-                <div class="grupo-formulario">
-                    <label for="dni">DNI *</label>
-                    <input type="text" id="dni" name="dni" required>
-                </div>
+            <div class="form-group">
+                <label for="dni">DNI *</label>
+                <input type="text" id="dni" name="dni" required>
+            </div>
 
-                <div class="grupo-formulario">
-                    <label for="fec_nacimiento">Fecha de Nacimiento *</label>
-                    <input type="date" id="fec_nacimiento" name="fec_nacimiento" required>
-                </div>
+            <div class="form-group">
+                <label for="fec_nacimiento">Fecha de Nacimiento *</label>
+                <input type="date" id="fec_nacimiento" name="fec_nacimiento" required>
+            </div>
 
-                <div class="grupo-formulario">
-                    <label for="foto">Foto del Hermano</label>
-                    <input type="file" id="foto" name="foto" accept="image/*">
-                </div>
+            <div class="form-group">
+                <label for="foto">Foto del Hermano</label>
+                <input type="file" id="foto" name="foto" accept="image/*">
+            </div>
 
-                <div class="grupo-formulario">
-                    <label for="cargo_junta">Cargo en la Junta</label>
-                    <input type="text" id="cargo_junta" name="cargo_junta" placeholder="Dejar en blanco si procede">
-                </div>
+            <div class="form-group">
+                <label for="cargo_junta">Cargo en la Junta</label>
+                <input type="text" id="cargo_junta" name="cargo_junta" placeholder="Dejar en blanco si procede">
+            </div>
 
-                <div class="grupo-formulario">
-                    <label for="id_tipo_hermano">Tipo de Hermano *</label>
-                    <select id="id_tipo_hermano" name="id_tipo_hermano" required>
-                        <option value="">Selecciona un tipo</option>
-                        <option value="1">Hermano tambor</option>
-                        <option value="2">Hermano de Luz</option>
-                        <option value="3">Hermano costalero</option>
-                        <option value="4">Otro</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="id_tipo_hermano">Tipo de Hermano *</label>
+                <select id="id_tipo_hermano" name="id_tipo_hermano" required>
+                    <option value="">Selecciona un tipo</option>
+                    <option value="1">Hermano tambor</option>
+                    <option value="2">Hermano de Luz</option>
+                    <option value="3">Hermano costalero</option>
+                    <option value="4">Otro</option>
+                </select>
+            </div>
 
-                <div class="grupo-botones">
-                    <button type="submit" class="boton boton-primario">Crear Hermano</button>
-                    <button type="reset" class="boton boton-secundario">Limpiar Formulario</button>
-                </div>
-            </form>
-        </div>
-    </main>
-</div>
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Crear Hermano</button>
+                <button type="reset" class="btn btn-secondary">Limpiar Formulario</button>
+            </div>
+        </form>
+    </div>
+</main>
 {% endblock %}
