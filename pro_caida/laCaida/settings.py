@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from .utils import get_secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-80#tubhj^6eunje!-u*ep=at$y6m_x43hytr*_tgv&%3_k-da&'
+SECRET_KEY = get_secret("SECRET_KEY") or 'django-insecure-80#tubhj^6eunje'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 environment_variable = os.environ.get('ENVIRONMENT', 'development')
@@ -32,7 +33,7 @@ if environment_variable == 'development':
 
 if environment_variable == 'production':
   DEBUG = False
-  ALLOWED_HOSTS = ['prod.localhost']  # Cambiar por el dominio real en producción (prod.localhost)
+  ALLOWED_HOSTS = ['prod.localhost']  
 
 
 
@@ -89,11 +90,11 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql', # Busca las librerias para usar PostgreSQL
-        'NAME': 'bd-caida',
-        'USER': 'alberto',
-        'PASSWORD': '1234',
-        'HOST': 'db',    # Nombre del servicio en docker-compose (contenedor)
-        'PORT': '5432',         # Puerto por defecto de PostgreSQL
+        'NAME': get_secret("POSTGRES_DB") or os.environ.get('POSTGRES_DB'),
+        'USER': get_secret("POSTGRES_USER") or os.environ.get('POSTGRES_USER'),
+        'PASSWORD': get_secret("POSTGRES_PASSWORD") or os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',   
+        'PORT': '5432',         
     }
 }
 
@@ -133,8 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'

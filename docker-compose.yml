@@ -4,20 +4,61 @@ services:
     container_name: bd-postgres
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_DB: bd-caida
-      POSTGRES_USER: alberto
-      POSTGRES_PASSWORD: "1234"
+    secrets:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
     restart: always
 
   web:
     build: .
     ports:
-      - "81:8000"
+      - "8000"
+    secrets:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
+      - SECRET_KEY
     volumes:
       - ./pro_caida:/code
-      - ./scripts_docker:/scripts_docker
+    command: sh /code/scripts_docker/dev/web_wait_postgres.sh
+    networks:
+      - frontend
+      - backend
     depends_on:
       - db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server
+    ports:
+      - "82:80"
+    volumes:
+      - ./pro_caida:/code
+      - ./pro_caida/static:/code/static
+    networks:
+      - frontend
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+
+networks:
+  frontend:
+  backend:
+
+
+secrets:
+  POSTGRES_PASSWORD:
+    file: ./secrets/postgres_password.txt
+  POSTGRES_USER:
+    file: ./secrets/postgres_user.txt
+  POSTGRES_DB:
+    file: ./secrets/postgres_db.txt
+  SECRET_KEY:
+    file: ./secrets/secret_key.txt
