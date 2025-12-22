@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>{{object|yesno:'Actualizar Usuario,Creación de un nuevo usuario'}}</h2>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{{object|yesno:'Actualizar,Crear'}}">
+        {% if object %}
+            <a href="{% url 'acto_delete' object.pk %}" 
+                style="display: inline-block; padding: 5px 10px; margin-left: 10px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 3px; cursor: pointer;">
+                Eliminar
+            </a>
+        {% endif %}
+    </form>
+</div>

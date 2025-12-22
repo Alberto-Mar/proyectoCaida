@@ -30,6 +30,12 @@ urlpatterns = [
     path('inicio_hermano/', v_users.HermanoView.as_view(), name="inicio_hermano" ),
     path('inicio_admin/', v_users.AdminView.as_view(), name="inicio_admin" ),
     path('crear_acto/', v_common.CrearActoView.as_view(), name="crear_acto" ),
+    
+    path('c_acto/', v_eventos.ActoCreateView.as_view(), name="c_acto" ),
+    path('acto_update/<int:pk>/', v_eventos.ActoUpdateView.as_view(), name='acto_update'),
+    path('acto_delete/<int:pk>/', v_eventos.ActoDeleteView.as_view(), name='acto_delete'),
+    path('listado_actos/', v_eventos.ListadoActosView.as_view(), name="listado_actos" ),
+    
     path('crear_hermano_auto/', v_users.UserCreateView.as_view(), name="crear_hermano_auto" ),
     path('lista_hermanos/', v_users.ListaHermanosView.as_view(), name="lista_hermanos" ),
     path('crear_hermano/', v_users.CrearHermanoView.as_view(), name="crear_hermano" ),

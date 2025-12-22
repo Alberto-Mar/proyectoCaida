@@ -30,12 +30,12 @@ environment_variable = os.environ.get('ENVIRONMENT', 'development')
 if environment_variable == 'development':
   DEBUG = True
   ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+  CSRF_TRUSTED_ORIGINS = ["http://localhost:82"]
 
 if environment_variable == 'production':
   DEBUG = False
   ALLOWED_HOSTS = ['prod.localhost']  
-
-
+  CSRF_TRUSTED_ORIGINS = ["http://localhost:82"]
 
 # Application definition
 

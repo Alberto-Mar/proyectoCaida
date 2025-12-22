@@ -1,0 +1,8 @@
+<div class="container">
+    <h2>Eliminar un acto</h2>
+    <form method="post">{% csrf_token %}
+        <p>¿Está seguro que quiere eliminar este acto "{{ object }}"?</p>
+        {{ form }}
+        <input type="submit" value="Confirmar" class="btn btn-danger">
+    </form>
+</div>

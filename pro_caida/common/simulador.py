@@ -1,5 +1,9 @@
 from faker import Faker
+from django.utils import timezone
+from datetime import timedelta
+
 from users.models import Hermano
+from eventos.models import Acto
 import random
 
 fake = Faker("es_ES")
@@ -15,3 +19,15 @@ def generar_hermanos(n):
             cargo_junta=fake.boolean(chance_of_getting_true=5),
             tipo_hermano=random.choice(tipos_hermano),
             )
+
+fechas = [
+    timezone.now() - timedelta(days=random.randint(1, 3650))
+    for _ in range(100)
+]         
+def generar_actos(n):
+    for _ in range(n):
+        Acto.objects.create(
+            nombre=fake.sentence(nb_words=4),
+            tipo=fake.word(),
+            fec_inicio=random.choice(fechas),
+        )

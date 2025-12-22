@@ -1,0 +1,67 @@
+<form method="GET">
+    <!-- Textbox -->
+    <input type="text" name="q" value="{{ q }}" placeholder="Buscar acto...">
+
+    <!-- Radio buttons -->
+    <!-- <p>Género:</p>
+    <label>
+        <input type="radio" name="gender" value="M" {% if gender == "M" %}checked{% endif %}> Masculino
+    </label>
+    <label>
+        <input type="radio" name="gender" value="F" {% if gender == "F" %}checked{% endif %}> Femenino
+    </label> -->
+
+    <!-- Checkbox -->
+    <!-- <p>
+        <label>
+            <input type="checkbox" name="subscribe" value="yes" {% if subscribe == "yes" %}checked{% endif %}>
+            Suscribirme
+        </label>
+    </p> -->
+
+    <!-- Combobox / Select -->
+    <!-- <p>País:</p>
+    <select name="country">
+        <option value="">--Selecciona--</option>
+        <option value="ES" {% if country == "ES" %}selected{% endif %}>España</option>
+        <option value="MX" {% if country == "MX" %}selected{% endif %}>México</option>
+        <option value="AR" {% if country == "AR" %}selected{% endif %}>Argentina</option>
+    </select> -->
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<ul>
+    {% for acto in actos %}
+    <li>
+        <a href="{% url 'acto_update' acto.pk %}" style="text-decoration: none; color: #007bff;">
+            {{ acto.nombre }} - {{ acto.fec_inicio }}
+        </a>
+    </li>
+    {% empty %}
+    <li>No hay actos</li>
+    {% endfor %}
+</ul>
+<!-- {% for user in usuarios %}
+           <p>{{ user.nombre }} - {{ user.edad }}</p> 
+        {% empty %}
+            No hay usuarios
+        {% endfor %} -->
+
+<div class="pagination">
+    <span class="step-links">
+        {% if actos.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ actos.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ actos.number }} of {{ actos.paginator.num_pages }}.
+        </span>
+
+        {% if actos.has_next %}
+        <a href="?page={{ actos.next_page_number }}">next</a>
+        <a href="?page={{ actos.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
