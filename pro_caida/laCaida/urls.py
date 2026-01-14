@@ -24,8 +24,11 @@ from users import views as v_users
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', v_common.LoginView.as_view(), name="login"),
-    path('login', v_common.LoginView.as_view(), name="login"),
+    
+    path('', v_common.LoginFormView.as_view(), name="login"),
+    path('login', v_common.LoginFormView.as_view(), name="login"),
+    path('logout', v_common.LogoutView.as_view(), name="logout"),
+    
     path('error/', v_common.ErrorView.as_view(), name="error" ),
     path('inicio_hermano/', v_users.HermanoView.as_view(), name="inicio_hermano" ),
     path('inicio_admin/', v_users.AdminView.as_view(), name="inicio_admin" ),

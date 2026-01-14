@@ -9,7 +9,12 @@
             <nav>
                 <a href="#">Inicio</a>
                 <a href="#">Contacto</a>
-                <a href="{% url 'login' %}">Cerrar sesión</a>
+                {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar Sesión</button>
+                </form>
+                {% endif %}
             </nav>
         </div>
     </header>

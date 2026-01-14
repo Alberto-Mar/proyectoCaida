@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="contenedor-login">
+    <!-- <div class="contenedor-login">
         <div class="box-login">
             <div class="logo-login">
                 <img src="{% static 'caida/images/logo_caida.png' %}" alt="Caida Logo">
@@ -28,7 +28,12 @@
                 <button type="submit" class="btn btn-primary button-full">Iniciar Sesión</button>
             </form>
         </div>
-    </div>
+    </div> -->
+    <form>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary button-full">Iniciar Sesión</button>
+    </form>
     {% block footer %} {% include "caida/footer.html" %} {% endblock %}
 </body>
 

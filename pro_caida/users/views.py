@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, CreateView, UpdateView, ListView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from .models import Hermano
+from .forms import HermanoForm
 
 # Create your views here.
 
@@ -19,9 +20,17 @@ class ListaHermanosView(ListView):
 
 class UserCreateView(CreateView):
     model = Hermano
-    fields = ['nombre_completo', 'numero_hermano', 'dni', 'fec_nacimiento', 'foto', 'cargo_junta']
+    form_class = HermanoForm
+    fields = '__all__'
     success_url = reverse_lazy('login')  
     
+    def form_valid(self, form):
+        usuario = form.save(commit=False)
+        usuario.set_password(form.cleaned_data['dni'])
+        usuario.save()
+        return super().form_valid(form)
+
+
 class UserUpdateView(UpdateView):
     model = Hermano
     fields = ['nombre_completo', 'numero_hermano', 'dni', 'fec_nacimiento', 'foto', 'cargo_junta']
