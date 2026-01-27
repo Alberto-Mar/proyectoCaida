@@ -1,5 +1,6 @@
 services:
   web:
+    image: albertomarmar/caidaelche:latest
     environment:
       - production
   nginx:

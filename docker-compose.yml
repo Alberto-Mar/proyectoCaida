@@ -19,7 +19,6 @@ services:
     restart: always
 
   web:
-    build: .
     ports:
       - "8000"
     secrets:
@@ -55,7 +54,6 @@ volumes:
 networks:
   frontend:
   backend:
-
 
 secrets:
   POSTGRES_PASSWORD:
