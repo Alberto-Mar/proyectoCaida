@@ -1,5 +1,5 @@
-{% for hermano in page_obj %}
-    {{ hermano.nombre_completo }}<br>
+{% for hermano in object_list %}
+    {{ hermano.nombre }}{{ hermano.apellido1 }}{{ hermano.apellido2 }}<br>
 {% endfor %}
 
 <div class="pagination">

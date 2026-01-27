@@ -3,11 +3,32 @@ services:
     image: albertomarmar/caidaelche:latest
     environment:
       - production
+    command: sh /code/scripts_docker/prod/web_wait_postgres.sh
+
   nginx:
     ports:
       - "443:443"
-    volumes:
-      - ./nginx/prod/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/prod/certs:/etc/nginx/certs
-      - ./pro_caida/static:/code/static
-      - ./pro_caida/media:/code/media
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/conf.d/default.conf
+  
+  migrate_static:
+    image: albertomarmar/caidaelche:latest
+    environment:
+      - MIGRATE=yes
+    command: sh /code/scripts_docker/prod/web_migrate.sh
+    secrets:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
+      - SECRET_KEY
+    networks:
+      - backend
+    deploy:
+      mode: replicated-job
+      replicas: 1
+
+configs:
+  nginx_conf:
+    file: ./nginx/prod/nginx.conf
+    

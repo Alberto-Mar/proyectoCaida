@@ -21,7 +21,6 @@ class ListaHermanosView(ListView):
 class UserCreateView(CreateView):
     model = Hermano
     form_class = HermanoForm
-    fields = '__all__'
     success_url = reverse_lazy('login')  
     
     def form_valid(self, form):

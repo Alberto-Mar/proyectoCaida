@@ -22,10 +22,14 @@ class HermanoForm(forms.ModelForm):
         self.helper.layout = Layout(
             Fieldset(
                 'Información Personal',
-                Row(
-                    Column('nombre_completo', css_class='col-md-6'),
-                    Column('dni', css_class='col-md-6'),
-                ),
+            Row(
+                Column('dni', css_class='col-md-6'),
+                Column('nombre', css_class='col-md-6'),
+            ),
+            Row(
+                Column('apellido1', css_class='col-md-6'),
+                Column('apellido2', css_class='col-md-6'),
+            ),
                 Row(
                     Column('fec_nacimiento', css_class='col-md-6'),
                     Column('email', css_class='col-md-6'),

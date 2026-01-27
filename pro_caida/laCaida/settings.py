@@ -30,12 +30,19 @@ environment_variable = os.environ.get('ENVIRONMENT', 'development')
 if environment_variable == 'development':
   DEBUG = True
   ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-  CSRF_TRUSTED_ORIGINS = ["http://localhost:82"]
+  CSRF_TRUSTED_ORIGINS = ["http://localhost"]
 
 if environment_variable == 'production':
   DEBUG = False
-  ALLOWED_HOSTS = ['prod.localhost']  
-  CSRF_TRUSTED_ORIGINS = ["http://localhost:82"]
+  ALLOWED_HOSTS = ['prod.localhost', 'lacaidaelche.online', 'www.lacaidaelche.online']  
+  CSRF_TRUSTED_ORIGINS = [
+    "https://localhost",
+    "https://lacaidaelche.online",
+    "https://www.lacaidaelche.online",
+    "http://localhost",
+    "http://lacaidaelche.online",
+    "http://www.lacaidaelche.online",
+]
 
 # Application definition
 
