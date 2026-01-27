@@ -12,13 +12,16 @@ tipos_hermano = ['Costalero', 'Nazareno', 'Tambor', 'Protector']
 def generar_hermanos(n):
     for _ in range(n):
         Hermano.objects.create(
-            nombre_completo=fake.name(),
-            numero_hermano=random.unique.randint(10, 9999),
+            username=fake.user_name(),
+            nombre=fake.first_name(),
+            apellido1=fake.last_name(),
+            apellido2=fake.last_name(),
+            numero_hermano=random.unique.randint(1, 10000),
             dni=fake.unique.nif(),
             fec_nacimiento=fake.date_of_birth(minimum_age=18, maximum_age=80),
-            cargo_junta=fake.boolean(chance_of_getting_true=5),
-            tipo_hermano=random.choice(tipos_hermano),
-            )
+            cargo_junta=random.choice([True, False]),   
+            email=fake.unique.email(),
+        )
 
 fechas = [
     timezone.now() - timedelta(days=random.randint(1, 3650))
