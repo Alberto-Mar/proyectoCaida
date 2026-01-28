@@ -53,9 +53,7 @@ volumes:
 
 networks:
   frontend:
-    driver: overlay
   backend:
-    driver: overlay
 
 secrets:
   POSTGRES_PASSWORD:

@@ -26,11 +26,14 @@ from rest_framework import routers
 
 
 routerAPI = routers.DefaultRouter()
-routerAPI.register(r'hermanos', v_api.UserViewSet, basename='hermano')
-routerAPI.register(r'hermanos_crud', v_api.HermanoCrudViewSet, basename='hermano_crud')
+routerAPI.register(r'hermanos', v_api.UserViewSet, basename='hermanos')
+routerAPI.register(r'hermanos_crud', v_api.HermanoCrudViewSet, basename='hermanos_crud')
+routerAPI.register(r'hermanos_orden', v_api.HermanoListViewSet, basename='hermanos_orden')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(routerAPI.urls)),  
+
     
     path('', v_common.LoginFormView.as_view(), name="login"),
     path('login', v_common.LoginFormView.as_view(), name="login"),
@@ -50,7 +53,6 @@ urlpatterns = [
     path('lista_hermanos/', v_users.ListaHermanosView.as_view(), name="lista_hermanos" ),
     path('crear_hermano/', v_users.CrearHermanoView.as_view(), name="crear_hermano" ),
     
-    path('api/', include(routerAPI.urls)),  
     
     
 ]

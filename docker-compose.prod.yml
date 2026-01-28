@@ -32,4 +32,10 @@ services:
 configs:
   nginx_conf:
     file: ./nginx/prod/nginx.conf
+
+networks:
+  frontend:
+    driver: overlay
+  backend:
+    driver: overlay
     

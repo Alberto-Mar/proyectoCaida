@@ -1,6 +1,8 @@
 services:
   web:
     build: .
+    volumes:
+      - ./pro_caida/scripts_docker:/code/scripts_docker
     environment:
       - ENVIRONMENT=development
   nginx:
