@@ -2,7 +2,7 @@ services:
   web:
     image: albertomarmar/caidaelche:latest
     environment:
-      - production
+      - ENVIRONMENT=production
     command: sh /code/scripts_docker/prod/web_wait_postgres.sh
 
   nginx:
@@ -15,6 +15,7 @@ services:
   migrate_static:
     image: albertomarmar/caidaelche:latest
     environment:
+      - ENVIRONMENT=production
       - MIGRATE=yes
     command: sh /code/scripts_docker/prod/web_migrate.sh
     secrets:

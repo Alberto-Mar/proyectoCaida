@@ -47,7 +47,7 @@ class Hermano(AbstractBaseUser, PermissionsMixin):
     activo = models.BooleanField(default=True)
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     
     nombre = models.CharField(max_length=200)  # obligatorio

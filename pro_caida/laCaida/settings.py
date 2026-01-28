@@ -34,7 +34,14 @@ if environment_variable == 'development':
 
 if environment_variable == 'production':
   DEBUG = False
-  ALLOWED_HOSTS = ['prod.localhost', 'lacaidaelche.online', 'www.lacaidaelche.online']  
+  SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+  USE_X_FORWARDED_HOST = True
+  ALLOWED_HOSTS = [
+    'prod.localhost', 
+    'lacaidaelche.online', 
+    'www.lacaidaelche.online',
+    ]  
+  
   CSRF_TRUSTED_ORIGINS = [
     "https://localhost",
     "https://lacaidaelche.online",
@@ -127,6 +134,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 

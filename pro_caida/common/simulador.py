@@ -10,16 +10,17 @@ fake = Faker("es_ES")
 tipos_hermano = ['Costalero', 'Nazareno', 'Tambor', 'Protector']
 
 def generar_hermanos(n):
-    for _ in range(n):
+    numeros = random.sample(range(1, n + 1), n)
+    for numero in numeros:
         Hermano.objects.create(
             username=fake.user_name(),
             nombre=fake.first_name(),
             apellido1=fake.last_name(),
             apellido2=fake.last_name(),
-            numero_hermano=random.unique.randint(1, 10000),
+            numero_hermano=numero,
             dni=fake.unique.nif(),
             fec_nacimiento=fake.date_of_birth(minimum_age=18, maximum_age=80),
-            cargo_junta=random.choice([True, False]),   
+            cargo_junta=random.choice([True, False]),
             email=fake.unique.email(),
         )
 
