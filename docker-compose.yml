@@ -38,9 +38,6 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
-    volumes:
-      - static_data:/code/static
-      - media_data:/code/media
     networks:
       - frontend
     depends_on:
@@ -48,8 +45,7 @@ services:
 
 volumes:
   postgres_data:
-  static_data:
-  media_data:
+
 
 networks:
   frontend:
