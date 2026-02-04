@@ -7,16 +7,30 @@ services:
 
   nginx:
     ports:
+      - "80:80"
       - "443:443"
     configs:
       - source: nginx_conf
         target: /etc/nginx/conf.d/default.conf
     volumes:
+      - certs-data:/data/letsencrypt
+      - certs:/etc/letsencrypt
       - static_data:/code/static
       - media_data:/code/media
-      - certs:/etc/letsencrypt
-      - certs-data:/data/letsencrypt
 
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:   
+  #     - certs:/etc/letsencrypt
+  #     - certs-data:/data/letsencrypt
+  #   command: >
+  #     certonly --webroot -w /data/letsencrypt -d lacaidaelche.online -d www.lacaidaelche.online --non-interactive --force-renewal --agree-tos -m albertomarjr5@gmail.com
+  #   deploy:
+  #     placement:
+  #       constraints:
+  #         - node.hostname == caidaVPS
+  #     restart_policy:
+  #       condition: none
   
   migrate_static:
     image: albertomarmar/caidaelche:latest
@@ -41,9 +55,7 @@ configs:
 
 networks:
   frontend:
-    driver: overlay
   backend:
-    driver: overlay
   
 volumes:
   certs:
