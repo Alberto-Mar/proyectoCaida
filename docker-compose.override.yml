@@ -13,6 +13,7 @@ services:
   
   migrate_static:
     build: .
+    user: root
     command: sh /code/scripts_docker/dev/web_migrate.sh
     volumes:
       - ./pro_caida:/code

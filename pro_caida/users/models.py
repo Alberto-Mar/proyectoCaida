@@ -2,11 +2,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.timezone import now
 
-class TipoHermano(models.Model):
-    Costalero = 'Costalero'
-    Nazareno = 'Nazareno'
-    Tambor = 'Tambor'
-    Protector = 'Protector'
+class TipoHermano(models.TextChoices):
+    COSTALERO = 'Costalero', 'Costalero'
+    NAZARENO = 'Nazareno', 'Nazareno'
+    TAMBOR = 'Tambor', 'Tambor'
+    PROTECTOR = 'Protector', 'Protector'
     
 class RolReservado(models.Model):
     hermano = models.ForeignKey('Hermano', on_delete=models.CASCADE)
@@ -45,30 +45,27 @@ class HermanoManager(BaseUserManager):
         
 
 class Hermano(AbstractBaseUser, PermissionsMixin):    
-    username = models.CharField(max_length=150, null=True, blank=True)  # opcional
+    username = models.CharField(max_length=150, null=True, blank=True)
     email = models.EmailField(unique=True, primary_key=True)
-    activo = models.BooleanField(default=True)
-    create_date = models.DateTimeField(auto_now_add=True)
-    update_date = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    
-    nombre = models.CharField(max_length=200)  # obligatorio
-    apellido1 = models.CharField(max_length=100, null=True, blank=True)  # opcional
-    apellido2 = models.CharField(max_length=100, null=True, blank=True)  # opcional
-    numero_hermano = models.IntegerField(unique=True)  # obligatorio
-    dni = models.CharField(max_length=20, unique=True)  # obligatorio
-    fec_nacimiento = models.DateField(null=True, blank=True)  # opcional
+    nombre = models.CharField(max_length=200)
+    apellido1 = models.CharField(max_length=100, null=True, blank=True)
+    apellido2 = models.CharField(max_length=100, null=True, blank=True)
+    numero_hermano = models.IntegerField(unique=True)
+    dni = models.CharField(max_length=20, unique=True)
+    fec_nacimiento = models.DateField(null=True, blank=True)
     foto = models.ImageField(upload_to="hermanos/", null=True, blank=True)
     cargo_junta = models.BooleanField(default=False)
+    
+    # Campos técnicos para Django Auth
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    create_date = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(auto_now=True)
+
     tipo_hermano = models.CharField(
-        choices=[
-            (TipoHermano.Costalero, 'Costalero'),
-            (TipoHermano.Nazareno, 'Nazareno'),
-            (TipoHermano.Tambor, 'Tambor'),
-            (TipoHermano.Protector, 'Protector'),
-        ],
-        default=TipoHermano.Protector,
+        max_length=20,
+        choices=TipoHermano.choices,
+        default=TipoHermano.PROTECTOR,
         blank=True,
     )
     
@@ -78,18 +75,16 @@ class Hermano(AbstractBaseUser, PermissionsMixin):
         blank=True,
     )
     
-    def __str__(self):
-        return f"{self.email} - {self.nombre} {self.apellido1}"
-    
     objects = HermanoManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["numero_hermano", "nombre", "dni"]
     
     def save(self, *args, **kwargs):
-        # Si es un usuario nuevo (no tiene PK aún) y no tiene contraseña seteada
         if not self.pk and not self.password:
             self.set_password(self.dni)
+        
         super().save(*args, **kwargs)
-   
-
+    
+    def __str__(self):
+        return f"{self.email} - {self.nombre} {self.apellido1}"
