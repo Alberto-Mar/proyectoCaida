@@ -1,0 +1,31 @@
+{% extends 'caida/base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="principal-completo">
+    <div id="header-dinamico"></div>
+    <div id="app-root"></div>
+
+    <div id="fuente-datos" style="display: none;">
+        {% for h in hermanos %}
+        <span class="nodo-hermano" 
+              data-email="{{ h.email }}" 
+              data-nombre="{{ h.nombre }}"
+              data-apellido1="{{ h.apellido1|default:'' }}"
+              data-numero="{{ h.numero_hermano }}" 
+              data-dni="{{ h.dni }}"
+              data-tipo="{{ h.tipo_hermano }}"></span>
+        {% endfor %}
+    </div>
+
+    <form id="form-borrado-global" method="post" style="display:none;">
+        {% csrf_token %}
+        <input type="hidden" name="accion" value="borrar">
+        <input type="hidden" name="email" id="input-borrado-email">
+    </form>
+
+    <div id="token-seguridad" data-csrf="{{ csrf_token }}" style="display:none;"></div>
+</main>
+
+<script src="{% static 'users/gestion_hermanos.js' %}?v={% now 'U' %}"></script>
+{% endblock %}

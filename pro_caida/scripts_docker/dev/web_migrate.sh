@@ -22,17 +22,18 @@ until postgres_ready; do
  >&2 echo "Postgres is unavailable - sleeping"
  sleep 1
 done
+
 if [ "$MAKEMIGRATIONS" = "yes" ]; then
   >&2 echo "Postgres is up - makemigrations "
-  su -m django_user -c "python manage.py makemigrations --noinput"
+  python manage.py makemigrations --noinput
 fi
 
 if [ "$MIGRATE" = "yes" ]; then
   >&2 echo "Postgres is up - migrate "
-  su -m django_user -c "python manage.py migrate --noinput"
+  python manage.py migrate --noinput
 fi
 
 if [ "$STATIC" = "yes" ]; then
   >&2 echo "Postgres is up - collecting static"
-  su -m django_user -c "python manage.py collectstatic --noinput"
+  python manage.py collectstatic --noinput --clear
 fi

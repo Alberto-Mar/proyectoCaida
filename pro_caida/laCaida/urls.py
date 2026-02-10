@@ -52,10 +52,10 @@ urlpatterns = [
     path('crear_hermano_auto/', v_users.UserCreateView.as_view(), name="crear_hermano_auto" ),
     path('lista_hermanos/', v_users.ListaHermanosView.as_view(), name="lista_hermanos" ),
     path('crear_hermano/', v_users.CrearHermanoView.as_view(), name="crear_hermano" ),
-    
-    
+    path('gestion_hermanos/', v_users.GestionHermanosView.as_view(), name="gestion_hermanos" ),
     
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -22,8 +22,11 @@ class HermanoManager(BaseUserManager):
             raise ValueError("Ha de proporcionar un email válido")
 
         email = self.normalize_email(email)
-
         user = self.model(email=email, **extra_fields)
+        
+        if not password and 'dni' in extra_fields:
+            password = extra_fields['dni']
+            
         user.set_password(password)
         user.is_active = True
         user.save(using=self._db)
@@ -82,5 +85,11 @@ class Hermano(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["numero_hermano", "nombre", "dni"]
+    
+    def save(self, *args, **kwargs):
+        # Si es un usuario nuevo (no tiene PK aún) y no tiene contraseña seteada
+        if not self.pk and not self.password:
+            self.set_password(self.dni)
+        super().save(*args, **kwargs)
    
 

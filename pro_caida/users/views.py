@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, CreateView, UpdateView, ListView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
+from django.contrib import messages
 from .models import Hermano
 from .forms import HermanoForm
 
@@ -37,3 +38,42 @@ class UserUpdateView(UpdateView):
 
 class CrearHermanoView(TemplateView):
     template_name="caida/crear_hermano.html"
+    
+class GestionHermanosView(TemplateView):
+    template_name = "caida/gestion_hermanos.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Enviamos todos los hermanos para que JS genere las cards
+        context['hermanos'] = Hermano.objects.all().order_by('numero_hermano')
+        return context
+
+    def post(self, request, *args, **kwargs):
+        # Determinamos si es borrar o guardar (crear/editar) mediante un campo oculto 'accion'
+        accion = request.POST.get('accion')
+        email_pk = request.POST.get('email')
+
+        if accion == 'borrar':
+            hermano = get_object_or_404(Hermano, email=email_pk)
+            hermano.delete()
+            messages.warning(request, "Hermano eliminado correctamente.")
+        
+        elif accion == 'guardar':
+            # El email es la PK, si existe actualiza, si no, crea.
+            hermano, created = Hermano.objects.update_or_create(
+                email=email_pk,
+                defaults={
+                    'nombre': request.POST.get('nombre'),
+                    'dni': request.POST.get('dni'),
+                    'numero_hermano': request.POST.get('numero_hermano'),
+                    'tipo_hermano': request.POST.get('tipo_hermano'),
+                    'cargo_junta': request.POST.get('cargo_junta') == 'on'
+                }
+            )
+            if created:
+                hermano.set_password(request.POST.get('dni'))
+                hermano.save()
+            
+            messages.success(request, f"Hermano {'registrado' if created else 'actualizado'} con éxito.")
+
+        return redirect('gestion_hermanos') 

@@ -1,3 +1,7 @@
+/* =========================================
+   1. RESET Y ESTILOS BASE
+   ========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,18 +10,23 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f5f5;
+    background-color: #f5f5f5;
     color: #333;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    line-height: 1.6;
 }
+
+/* =========================================
+   2. CABECERA Y NAVEGACIÓN (INTEGRADO FLEX)
+   ========================================= */
 
 header {
     background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
     color: white;
     padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .contenido-header {
@@ -44,45 +53,42 @@ header {
     font-weight: bold;
 }
 
+/* MODIFICADO: Contenedor nav en flex para alinear todo */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Asegura que los formularios de logout se mantengan en línea */
 nav form {
-    display: inline;
+    display: inline-flex;
+    margin: 0;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 2rem;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
+nav a, 
 .boton-nav {
     color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background 0.3s ease;
     background: transparent;
     border: none;
     cursor: pointer;
-
     font: inherit;
     display: inline-block;
-
-    text-decoration: none;
-    margin-left: 2rem;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background 0.3s;
+    white-space: nowrap;
 }
 
-.boton-nav:hover {
-    background: rgba(255,255,255,0.2);
-}
-
-
-
-
+.boton-nav:hover, 
 nav a:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
 }
+
+/* =========================================
+   3. ESTRUCTURA Y SIDEBAR
+   ========================================= */
 
 .contenedor {
     flex: 1;
@@ -93,7 +99,7 @@ nav a:hover {
 .sidebar {
     width: 250px;
     min-width: 250px;
-    background: #1a1a1a;
+    background-color: #1a1a1a;
     color: white;
     padding: 2rem 0;
     flex-shrink: 0;
@@ -104,22 +110,31 @@ nav a:hover {
     color: white;
     text-decoration: none;
     padding: 1rem 2rem;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     border-left: 3px solid transparent;
 }
 
 .sidebar a:hover,
 .sidebar a.activo {
-    background: #dc143c;
+    background-color: #dc143c;
     border-left-color: white;
 }
 
+/* =========================================
+   4. CONTENIDO PRINCIPAL (MAIN)
+   ========================================= */
+
 main {
     flex: 1;
-    padding: 2rem 2rem 4rem;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 2rem;
     width: 100%;
+    max-width: 1100px; 
+    margin: 0 auto;
+}
+
+main.principal-completo {
+    max-width: 100%;
+    margin: 0;
 }
 
 .page-header {
@@ -129,41 +144,119 @@ main {
 .page-header h1 {
     color: #dc143c;
     margin-bottom: 0.5rem;
+    font-size: 2rem;
 }
+
+/* =========================================
+   5. GRID Y TARJETAS (EFECTO HOVER INTEGRADO)
+   ========================================= */
 
 .grid-tarjetas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    margin-bottom: 2rem;
+    padding: 1rem 0;
 }
 
 .tarjeta {
-    background: white;
-    padding: 2rem;
+    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.tarjeta:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(220,20,60,0.3);
-}
-
-
-.button-group {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
     display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative; /* Importante para la imagen de fondo */
+}
+
+/* Estilos específicos para Actos con Efecto Hover */
+.tarjeta-evento {
+    padding: 0;
+    height: 420px; /* Altura fija para el efecto de expansión */
+}
+
+/* La imagen ahora se posiciona para cubrir el fondo en hover */
+.imagen-evento {
+    width: 100%;
+    height: 220px; /* Altura inicial */
+    object-fit: cover;
+    display: block;
+    position: absolute; /* Cambiado a absoluto para animar el tamaño */
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+.contenido-tarjeta-evento {
+    position: relative;
+    z-index: 2; /* Siempre por encima de la imagen */
+    padding: 1.5rem;
+    margin-top: 220px; /* Empieza justo donde acaba la imagen inicial */
+    transition: all 0.5s ease-in-out;
+    background-color: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* EFECTO HOVER: La imagen se vuelve el fondo y el texto cambia */
+.tarjeta-evento:hover .imagen-evento {
+    height: 100%;
+    filter: brightness(0.3); /* Oscurecemos para legibilidad */
+    transform: scale(1.05);
+}
+
+.tarjeta-evento:hover .contenido-tarjeta-evento {
+    margin-top: 0; /* El contenido sube */
+    background-color: transparent; /* Permite ver la foto de fondo */
+    color: white; /* Letras blancas para contraste */
+}
+
+/* Asegurar que el título cambie de color también */
+.tarjeta-evento:hover h3 {
+    color: white;
+}
+
+/* Adaptar etiquetas y botones en hover */
+.tarjeta-evento:hover .etiqueta {
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* =========================================
+   6. COMPONENTES Y BOTONES
+   ========================================= */
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #dc143c;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #b01030;
+}
+
+.btn-secondary {
+    background-color: #1a1a1a;
+    color: white;
 }
 
 .button-full {
     width: 100%;
-}
-
-.texto-centro {
-    text-align: center;
 }
 
 .margen-superior-1 {
@@ -174,36 +267,43 @@ main {
     margin-top: 2rem;
 }
 
-.margen-inferior-1 {
-    margin-bottom: 1rem;
+/* Etiquetas */
+.etiqueta {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: inline-block;
 }
 
-.margen-inferior-2 {
-    margin-bottom: 2rem;
+.etiqueta-activo {
+    background-color: #d4edda;
+    color: #155724;
 }
 
-.margen-izquierda-1 {
-    margin-left: 1rem;
+.etiqueta-pendiente {
+    background-color: #fff3cd;
+    color: #856404;
 }
 
-.color-gris {
-    color: #666;
-}
+/* =========================================
+   7. FORMULARIOS, TABLAS Y RESTO...
+   ========================================= */
 
-.titulo-tabla {
-    margin-bottom: 1rem;
-    color: #1a1a1a;
-}
-
-.principal-completo {
-    width: 100%;
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .contenedor-tabla {
-    background: white;
+    background-color: white;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
 }
 
@@ -213,7 +313,7 @@ table {
 }
 
 th {
-    background: #1a1a1a;
+    background-color: #1a1a1a;
     color: white;
     padding: 1rem;
     text-align: left;
@@ -224,415 +324,51 @@ td {
     border-bottom: 1px solid #eee;
 }
 
-tr:hover {
-    background: #f9f9f9;
-}
-
-.etiqueta {
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-.etiqueta-activo {
-    background: #d4edda;
-    color: #155724;
-}
-
-.etiqueta-pendiente {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.btn-primary {
-    background: #dc143c;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #b01030;
-}
-
-.btn-secondary {
-    background: #1a1a1a;
-    color: white;
-}
-
-.btn-secondary:hover {
-    background: #333;
-}
-
-.btn-small {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-}
-
-.form-container {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #1a1a1a;
-    font-weight: 600;
-}
-
-input, textarea, select {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: #dc143c;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-.contenedor-login {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1a1a1a 0%, #dc143c 100%);
-}
-
-.box-login {
-    background: white;
-    padding: 3rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    width: 100%;
-    max-width: 400px;
-}
-
-.logo-login {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.logo-login img {
-    width: 100px;
-    height: auto;
-}
-
-.titulo-login {
-    text-align: center;
-    color: #1a1a1a;
-    margin-bottom: 2rem;
-}
-
-.contenedor-error {
-    text-align: center;
-    padding: 4rem 2rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.icono-error {
-    font-size: 6rem;
-    color: #dc143c;
-    margin-bottom: 1rem;
-}
-
-.codigo-error {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #1a1a1a;
-    margin-bottom: 1rem;
-}
-
-.mensaje-error {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 2rem;
-}
-
-.tarjeta-evento {
-    position: relative;
-    overflow: hidden;
-}
-
-.encabezado-tarjeta-evento {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.imagen-evento {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-.tarjeta-evento:hover h3{
-    color: white;
-}
-.tarjeta-evento:hover .detalles-evento p{
-    color: white;
-}
-
-
-.tarjeta-evento:hover .imagen-evento {
-    opacity: 1;
-}
-
-.contenido-tarjeta-evento {
-    position: relative;
-    z-index: 2;
-}
-
-.detalles-evento {
-    margin-top: 1rem;
-}
-
-.detalles-evento p {
-    margin: 0.5rem 0;
-    color: #666;
-    font-size: 0.95rem;
-}
-
-.tarjeta-completo {
-    opacity: 0.7;
-}
-
 footer {
-    background: #1a1a1a;
+    background-color: #1a1a1a;
     color: white;
     text-align: center;
     padding: 1.5rem;
     margin-top: auto;
 }
 
-@media (min-width: 581px) and (max-width: 1024px) {
-    .contenido-header {
-        padding: 0 1rem;
-    }
+/* =========================================
+   10. MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
 
-    .sidebar {
-        width: 200px;
-        min-width: 200px;
-    }
-
-    .sidebar a {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-    }
-
-    main {
-        padding: 1.5rem;
-    }
-
+@media (max-width: 1200px) {
     .grid-tarjetas {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .logo img {
-        height: 40px;
-    }
-
-    .texto-logo {
-        font-size: 1.5rem;
-    }
-
-    nav a {
-        margin-left: 1.5rem;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-    }
 }
 
-@media (max-width: 580px) {
-    header {
-        padding: 1rem;
-    }
-
-    .logo img {
-        height: 35px;
-    }
-
-    .texto-logo {
-        font-size: 1.3rem;
-    }
-
-    nav {
-        width: 100%;
-    }
-
-    nav a {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.85rem;
-        flex: 1;
-        text-align: center;
-    }
-
+@media (max-width: 600px) {
     .contenedor {
         flex-direction: column;
     }
-
+    
     .sidebar {
         width: 100%;
         min-width: 100%;
-        padding: 0.5rem 0;
     }
-
-    .sidebar a {
-        padding: 0.7rem 1rem;
-        font-size: 0.85rem;
-    }
-
-    main {
-        padding: 1rem 0.5rem;
-        padding-bottom: 3rem;
-    }
-
-    .page-header h1 {
-        font-size: 1.5rem;
-    }
-
-    .page-header p {
-        font-size: 0.9rem;
-    }
-
+    
     .grid-tarjetas {
         grid-template-columns: 1fr;
+    }
+    
+    .contenido-header {
+        flex-direction: column;
         gap: 1rem;
     }
-
-    .tarjeta {
-        padding: 1.2rem;
+    
+    /* En móvil ajustamos los márgenes del nav */
+    nav {
+        margin-top: 0.5rem;
+        gap: 0.5rem;
     }
 
-    .tarjeta h3 {
-        font-size: 0.95rem;
-    }
-
-    .icono-tarjeta {
-        font-size: 1.8rem;
-    }
-
-    .numero-tarjeta {
-        font-size: 1.3rem;
-    }
-
-    .contenedor-tabla {
-        padding: 1rem;
-        margin: 0 -0.5rem;
-    }
-
-    .contenedor-tabla h2 {
-        font-size: 1.2rem;
-    }
-
-    table {
-        font-size: 0.8rem;
-    }
-
-    th, td {
-        padding: 0.6rem 0.4rem;
-    }
-
-    .etiqueta {
-        font-size: 0.75rem;
-        padding: 0.2rem 0.6rem;
-    }
-
-    .btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .btn-small {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.75rem;
-    }
-
-    .form-container {
-        padding: 1rem;
-        margin: 0;
-        max-width: 100%;
-    }
-
-    .form-group {
-        margin-bottom: 1rem;
-    }
-
-    label {
-        font-size: 0.9rem;
-    }
-
-    input, textarea, select {
-        padding: 0.7rem;
-        font-size: 0.9rem;
-    }
-
-    .box-login {
-        padding: 1.5rem;
-        margin: 0.5rem;
-    }
-
-    .logo-login img {
-        width: 80px;
-    }
-
-    .titulo-login {
-        font-size: 1.5rem;
-    }
-
-    .contenedor-error {
-        padding: 2rem 1rem;
-    }
-
-    .codigo-error {
-        font-size: 2.5rem;
-    }
-
-    .icono-error {
-        font-size: 3rem;
-    }
-
-    .mensaje-error {
-        font-size: 1rem;
-    }
-
-    footer {
-        padding: 1rem;
-        font-size: 0.85rem;
+    .tarjeta-evento {
+        height: auto;
+        min-height: 400px;
     }
 }
