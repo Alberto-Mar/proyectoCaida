@@ -3,13 +3,13 @@ services:
     build: .
     volumes:
       - ./pro_caida/scripts_docker:/code/scripts_docker
+      - ./pro_caida:/code
     environment:
       - ENVIRONMENT=development
   nginx:
     volumes:
       - ./nginx/dev/nginx.conf:/etc/nginx/conf.d/default.conf
-      - static_data:/code/staticfiles
-      - media_data:/code/media
+      - ./pro_caida:/code
   
   migrate_static:
     build: .
@@ -17,8 +17,6 @@ services:
     command: sh /code/scripts_docker/dev/web_migrate.sh
     volumes:
       - ./pro_caida:/code
-      - static_data:/code/staticfiles
-      - media_data:/code/media
     environment:
       - MAKEMIGRATIONS=yes
       - MIGRATE=yes

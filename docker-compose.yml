@@ -24,9 +24,6 @@ services:
       - POSTGRES_USER
       - POSTGRES_DB
       - SECRET_KEY
-    volumes:
-      - static_data:/code/staticfiles
-      - media_data:/code/media
     command: sh /code/scripts_docker/dev/web_wait_postgres.sh
     networks:
       - frontend

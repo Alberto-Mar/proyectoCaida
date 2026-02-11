@@ -23,6 +23,7 @@ from eventos import views as v_eventos
 from users import views as v_users
 from users.api import views as v_api
 from rest_framework import routers
+from allauth import urls as allauth_urls
 
 
 routerAPI = routers.DefaultRouter()
@@ -53,6 +54,8 @@ urlpatterns = [
     path('lista_hermanos/', v_users.ListaHermanosView.as_view(), name="lista_hermanos" ),
     path('crear_hermano/', v_users.CrearHermanoView.as_view(), name="crear_hermano" ),
     path('gestion_hermanos/', v_users.GestionHermanosView.as_view(), name="gestion_hermanos" ),
+    
+    path('accounts/', include(allauth_urls))
     
 ]
 

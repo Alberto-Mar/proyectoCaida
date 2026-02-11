@@ -15,7 +15,7 @@ services:
     volumes:
       - certs-data:/data/letsencrypt
       - certs:/etc/letsencrypt
-      - static_data:/code/static
+      - static_data:/code/staticfiles
       - media_data:/code/media
 
   # certbot:
